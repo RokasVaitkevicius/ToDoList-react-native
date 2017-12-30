@@ -28,6 +28,7 @@ export default class App extends Component<{}> {
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
+          OMG I AM FAAASTsssaaa
         </Text>
         <Text style={styles.instructions}>
           {instructions}
