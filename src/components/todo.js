@@ -25,7 +25,8 @@ export default class Todo extends Component {
     return (
       <View style={styles.todo}>
         <Text style={styles.text}>TODO: {this.props.todo} </Text>
-        <Button style={styles.button}
+        <Button 
+          style={styles.button}
           title="E" 
           color="blue"
           onPress={this.props.editTodo}

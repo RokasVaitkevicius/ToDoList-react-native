@@ -16,6 +16,7 @@ import {
   Alert
 } from 'react-native';
 import Todo from './src/components/todo'
+import Modal from 'react-native-modal'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -30,7 +31,8 @@ export default class App extends Component {
     super()
     this.state = {
         todo: '',
-        todos: ['Make a sandwich', 'Go home', 'hahah']
+        todos: ['Make a sandwich', 'Go home', 'hahah'],
+        isModalVisible: false
     }
     this._onPressButton = this._onPressButton.bind(this)
     this.removeTodo = this.removeTodo.bind(this)
@@ -38,6 +40,10 @@ export default class App extends Component {
   }
 
   _onPressButton() {
+    if(!this.state.todo) {
+      return
+    }
+    this._textInput.setNativeProps({text: ''})
     this.setState(prevState => ({todos: [...prevState.todos, this.state.todo]}))
   }
 
@@ -58,11 +64,15 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.input}>
-        <TextInput 
+        <TextInput
+          ref={component => this._textInput = component}
+          style={styles.textInput} 
           onChangeText={(text) => this.setState({todo:text})}
           placeholder="Add something to list.." 
         />
-        <Button title="Add"
+        <Button 
+          style={styles.button}
+          title="Add"
           color="#841584"
           onPress={this._onPressButton}
         />
@@ -85,7 +95,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   list: {
-    flex: 2
+    flex: 10
   },
   input: {
     margin: 20,
@@ -96,6 +106,11 @@ const styles = StyleSheet.create({
   container: {
     marginTop:60,
     flex: 1,
-    justifyContent: 'center'
+  },
+  button: {
+    flex: 1
+  },
+  textInput: {
+    flex: 4
   }
 });
