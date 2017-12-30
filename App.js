@@ -34,6 +34,7 @@ export default class App extends Component {
     }
     this._onPressButton = this._onPressButton.bind(this)
     this.removeTodo = this.removeTodo.bind(this)
+    this.editTodo = this.editTodo.bind(this)
   }
 
   _onPressButton() {
@@ -41,7 +42,15 @@ export default class App extends Component {
   }
 
   removeTodo(i, e) {
-    this.state.todos.slice(i, 1)    
+    console.log(`Removing: ${i}`)
+    this.state.todos.splice(i, 1)
+    console.log(this.state.todos)    
+    this.setState(prevState => ({todos: prevState.todos}))
+  }
+
+  editTodo(i, e) {
+    console.log(`Editing: ${i}`)
+    this.state.todos.splice(i, 1)    
     this.setState(prevState => ({todos: prevState.todos}))
   }
 
@@ -65,6 +74,7 @@ export default class App extends Component {
             todo={todo} 
             key={i} 
             removeTodo={e => this.removeTodo(i, e)}
+            editTodo={e => this.editTodo(i, e)}
           />)}
         </ScrollView>
         </View>
@@ -80,14 +90,12 @@ const styles = StyleSheet.create({
   input: {
     margin: 20,
     flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   },
   container: {
     marginTop:60,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

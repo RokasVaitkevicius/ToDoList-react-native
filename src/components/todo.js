@@ -26,6 +26,11 @@ export default class Todo extends Component {
       <View style={styles.todo}>
         <Text style={styles.text}>TODO: {this.props.todo} </Text>
         <Button style={styles.button}
+          title="E" 
+          color="blue"
+          onPress={this.props.editTodo}
+        />
+        <Button style={styles.button}
           title="X" 
           color="red"
           onPress={this.props.removeTodo}
@@ -44,9 +49,9 @@ const styles = StyleSheet.create({
     margin: 5
   },
   button: {
-    //flex: 1
+    flex: 1
   },
   text: {
-    //flex: 4
+    flex: 4
   }
 });
